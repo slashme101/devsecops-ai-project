@@ -1,30 +1,25 @@
-# Use the official Python Image as the base image
-FROM python:3.12.4-alpine
+#!/bin/bash
 
-# Install the required system packages
-RUN apk update && \
-    apk add --no-cache gcc musl-dec libffi-dev
 
-# Set the working directory to /app
-WORKDIR /app
+export USE_AZURE_OPENAI=False
+export USE_AZURE_AD=False
+export AZURE_OPENAI_API_VERSION=2024-02-15-preview
+export AZURE_OPENAI_DEPLOYMENT_NAME=dall-e-3
+export AZURE_OPENAI_ENDPOINT=https://petclinic.openai.azure.com
+export AZURE_OPENAI_DALLE_ENDPOINT=https://petclinic.openai.azure.com
+export AZURE_OPENAI_DALLE_DEPLOYMENT_NAME=dall-e-3
+export OPENAI_API_KEY=$OPENAI_API_KEY
+export OPENAI_ORG_ID=org-MQENs1E0HzS2Bg6rgEc4jkR6
+export AZURE_OPENAI_API_KEY=$AZURE_OPENAI_API_KEY
 
-# Set the build argument for the app version number
-ARG AP_VERSION=0.1.0
+echo $USE_AZURE_OPENAI
+echo $USE_AZURE_AD
+echo $AZURE_OPENAI_API_VERSION
+echo $AZURE_OPENAI_DEPLOYMENT_NAME
+echo $AZURE_OPENAI_DALLE_ENDPOINT
+echo $AZURE_OPENAI_DALLE_DEPLOYMENT_NAME
+echo $OPENAI_ORG_ID
+echo $OPENAI_API_KEY
+echo $AZURE_OPENAI_ENDPOINT
 
-# Copy the requirements for into the container
-COPY requirements.txt .
 
-# Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application code intot the container
-COPY . .
-
-# Expose port 5001 for the DastAPI Application 
-EXPOSE 5001
-
-# Set the environment variable for the app version number
-ENV APP_VERSION=$APP_VERSION
-
-# Start the FastAPI application
-CMD ["ddtrace-run" "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5001"]
