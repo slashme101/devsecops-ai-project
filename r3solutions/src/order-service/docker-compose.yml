@@ -13,10 +13,10 @@ services:
     healthcheck:
       test: ["CMD", "rabbitmqctl", "status"]
       interval: 30s
-      timeiut: 10s
+      timeout: 10s
       retries: 5
     volumes:
-      - ../../rabbitmq_enabled_plugins:/etc/rabbbitmq/enabled_plugins
+      - ../../rabbitmq_enabled_plugins:/etc/rabbitmq/enabled_plugins
     networks:
       - backend_services
 networks:
