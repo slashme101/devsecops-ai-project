@@ -1,7 +1,7 @@
 name: Store AI Service
 
 on:
-  workflow_dispatch: {} # manual trigger  - will still auto-increment from ECR
+  workflow_dispatch:  # manual trigger  - will still auto-increment from ECR
   # push:
   #   branches:
   #   - main
