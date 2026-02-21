@@ -2,12 +2,12 @@ name: Store AI Service
 
 on:
   workflow_dispatch:  # manual trigger  - will still auto-increment from ECR
-  # push:
-  #   branches:
-  #   - main
-  # paths:
-  # - 'src/ai-service/**'
-  # - '.github/workflows/ai-service.yaml'
+  push:
+    branches:
+    - main
+    paths:
+    - 'src/ai-service/**'
+    - '.github/workflows/ai-service.yaml'
 
 env:
   SERVICE_NAME: ai-service
