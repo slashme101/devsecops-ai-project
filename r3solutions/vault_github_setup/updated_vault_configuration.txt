@@ -204,6 +204,8 @@ Unseal Key 5: IqCfAl1WriZj5/kGqhfUYsIVPE068D6cEUOMLPNsLX5S
 
 Initial Root Token: $VAULT_ROOT_TOKEN
 
+
+
 Vault initialized with 5 key shares and a key threshold of 3. Please securely
 distribute the key shares printed above. When the Vault is re-sealed,
 restarted, or stopped, you must supply at least 3 of these keys to unseal it
