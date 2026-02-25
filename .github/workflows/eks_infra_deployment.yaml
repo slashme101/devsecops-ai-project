@@ -5,16 +5,16 @@ on:
     # push:
     #   branches:
     #   - main
-        # inputs:
-        #     action:
-        #         description: 'Terraform action to perform'
-        #         required: true
-        #         type: choice
-        #         default: 'plan'
-        #         options:
-        #             - plan
-        #             - apply
-        #             - destroy
+        inputs:
+            action:
+                description: 'Terraform action to perform'
+                required: true
+                type: choice
+                default: 'plan'
+                options:
+                    - plan
+                    - apply
+                    - destroy
 
 env:
     AWS_REGION: 'us-east-1'
@@ -24,7 +24,7 @@ env:
 jobs:
     terraform-validate:
         name: Terraform Validate
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
         environment: ai-APP
         steps:
             - name: Checkout Code
@@ -48,7 +48,7 @@ jobs:
 
     security-scan:
         name: Security Scan
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
         needs: terraform-validate
         steps:
             - name: Checkout Code
@@ -69,7 +69,7 @@ jobs:
 
     terraform-plan:
         name: Terraform Plan
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
         needs: [terraform-validate, security-scan]
         environment: ai-APP
         outputs:
@@ -106,7 +106,7 @@ jobs:
 
     terraform-apply:
         name: Terraform Apply
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
         needs: terraform-plan
         if: github.event.inputs.action == 'apply'
         environment:
@@ -180,7 +180,7 @@ jobs:
 
     terraform-destroy:
         name: Terraform Destroy
-        runs-on: self-hosted
+        runs-on: ubuntu-latest
         needs: terraform-validate
         if: github.event.inputs.action == 'destroy'
         environment: 
@@ -229,7 +229,7 @@ jobs:
 
     notify-success:
       name: Deployment Success Notification
-      runs-on: self-hosted
+      runs-on: ubuntu-latest
       needs: terraform-apply
       if: success()
       steps:
@@ -239,7 +239,7 @@ jobs:
 
     notify-failure:
       name: Deployment Failure Notification
-      runs-on: self-hosted
+      runs-on: ubuntu-latest
       needs: terraform-apply
       if: failure()
       steps:
