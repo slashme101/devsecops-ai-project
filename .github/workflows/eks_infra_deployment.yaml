@@ -22,7 +22,7 @@ jobs:
     terraform-validate:
         name: Terraform Validate
         runs-on: self-hosted
-        environment: store-app
+        environment: ai-APP
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
@@ -68,7 +68,7 @@ jobs:
         name: Terraform Plan
         runs-on: self-hosted
         needs: [terraform-validate, security-scan]
-        environment: store-app
+        environment: ai-APP
         outputs:
             plan-exitcode: ${{ steps.plan.outputs.exitcode }}
         steps:
@@ -107,8 +107,8 @@ jobs:
         needs: terraform-plan
         if: github.event.inputs.action == 'apply'
         environment:
-            name: store-app # This references your Github environemnt where sectrts are stored
-            url: https://console.aws.amazon.com/eks/home?region=${{ env.AWS.REGION }}
+            name: ai-APP # This references your Github environemnt where sectrts are stored
+            url: https://console.aws.amazon.com/eks/home?region=${{ env.AWS_REGION }}
         steps:
             - name: checkout Code
               uses: actions/checkout@v4
@@ -181,7 +181,7 @@ jobs:
         needs: terraform-validate
         if: github.event.inputs.action == 'destroy'
         environment: 
-            name: store-app-destroy # Seperate environoment for destroy (you can add approval protection)
+            name: ai-APP-destroy # Seperate environoment for destroy (you can add approval protection)
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
