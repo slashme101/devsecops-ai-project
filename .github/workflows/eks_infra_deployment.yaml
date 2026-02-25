@@ -113,7 +113,7 @@ jobs:
         name: Terraform Apply
         runs-on: ubuntu-latest
         needs: terraform-plan
-        if: github.event.inputs.action == 'apply'
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'apply'
         environment:
             name: ai-APP # This references your Github environemnt where sectrts are stored
             url: https://console.aws.amazon.com/eks/home?region=${{ env.AWS_REGION }}
