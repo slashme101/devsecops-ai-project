@@ -2,19 +2,19 @@ name: AWS EKS Infratructure Deployment
 
 on:
     workflow_dispatch:
-    # push:
-    #   branches:
-    #   - main
-        inputs:
-            action:
-                description: 'Terraform action to perform'
-                required: true
-                type: choice
-                default: 'plan'
-                options:
-                    - plan
-                    - apply
-                    - destroy
+    push:
+      branches:
+      - main
+        # inputs:
+        #     action:
+        #         description: 'Terraform action to perform'
+        #         required: true
+        #         type: choice
+        #         default: 'plan'
+        #         options:
+        #             - plan
+        #             - apply
+        #             - destroy
 
 env:
     AWS_REGION: 'us-east-1'
