@@ -23,7 +23,7 @@ env:
 
 jobs:
     terraform-validate:
-        name: Terraform Validate
+        name: Terraform Validate!
         runs-on: ubuntu-latest
         environment: ai-APP
         steps:
